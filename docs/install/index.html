@@ -231,7 +231,7 @@ ENTRYPOINT [&quot;ntfy&quot;, &quot;serve&quot;]
 <span class=nt>metadata</span><span class=p>:</span><span class=w></span>
 <span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ntfy</span><span class=w></span>
 <span class=nt>data</span><span class=p>:</span><span class=w></span>
-<span class=nt>server.yml</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|</span><span class=w></span>
+<span class=w>  </span><span class=nt>server.yml</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|</span><span class=w></span>
 <span class=w>    </span><span class=no># Template: https://github.com/binwiederhier/ntfy/blob/main/server/server.yml</span><span class=w></span>
 <span class=w>    </span><span class=no>base-url: https://ntfy.sh</span><span class=w></span>
 </code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code>kubectl create configmap ntfy --from-file<span class=o>=</span>server.yml 
