@@ -374,7 +374,7 @@ LimitNOFILE=20500
 LimitNOFILE=40500
 </code></pre></div> </div> </div> </div> <h3 id=banning-bad-actors-fail2ban>Banning bad actors (fail2ban)<a class=headerlink href=#banning-bad-actors-fail2ban title="Permanent link">&para;</a></h3> <p>If you put stuff on the Internet, bad actors will try to break them or break in. <a href=https://www.fail2ban.org/ >fail2ban</a> and nginx's <a href=http://nginx.org/en/docs/http/ngx_http_limit_req_module.html>ngx_http_limit_req_module module</a> can be used to ban client IPs if they misbehave. This is on top of the <a href=#rate-limiting>rate limiting</a> inside the ntfy server.</p> <p>Here's an example for how ntfy.sh is configured, following the instructions from two tutorials (<a href=https://easyengine.io/tutorials/nginx/fail2ban/ >here</a> and <a href=https://easyengine.io/tutorials/nginx/block-wp-login-php-bruteforce-attack/ >here</a>):</p> <div class="tabbed-set tabbed-alternate" data-tabs=13:4><input checked=checked id=__tabbed_13_1 name=__tabbed_13 type=radio><input id=__tabbed_13_2 name=__tabbed_13 type=radio><input id=__tabbed_13_3 name=__tabbed_13 type=radio><input id=__tabbed_13_4 name=__tabbed_13 type=radio><div class=tabbed-labels><label for=__tabbed_13_1>/etc/nginx/nginx.conf</label><label for=__tabbed_13_2>/etc/nginx/sites-enabled/ntfy.sh</label><label for=__tabbed_13_3>/etc/fail2ban/filter.d/nginx-req-limit.conf</label><label for=__tabbed_13_4>/etc/fail2ban/jail.local</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code># Rate limit all IP addresses
 http {
-  limit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;
+  limit_req_zone $binary_remote_addr zone=one:10m rate=45r/m;
 }
 
 # Alternatively, whitelist certain IP addresses
@@ -389,7 +389,7 @@ http {
     1 $binary_remote_addr;
     0 &quot;&quot;;
   }
-  limit_req_zone $limitkey zone=one:10m rate=1r/s;
+  limit_req_zone $limitkey zone=one:10m rate=45r/m;
 }
 </code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code># For each server/location block
 server {
@@ -406,7 +406,7 @@ filter = nginx-req-limit
 action = iptables-multiport[name=ReqLimit, port=&quot;http,https&quot;, protocol=tcp]
 logpath = /var/log/nginx/error.log
 findtime = 600
-bantime = 7200
+bantime = 14400
 maxretry = 10
 </code></pre></div> </div> </div> </div> <h2 id=debuggingtracing>Debugging/tracing<a class=headerlink href=#debuggingtracing title="Permanent link">&para;</a></h2> <p>If something's not working right, you can debug/trace through what the ntfy server is doing by setting the <code>log-level</code> to <code>DEBUG</code> or <code>TRACE</code>. The <code>DEBUG</code> setting will output information about each published message, but not the message contents. The <code>TRACE</code> setting will also print the message contents. </p> <div class="admonition warning"> <p class=admonition-title>Warning</p> <p>Both options are very verbose and should only be enabled in production for short periods of time. Otherwise, you're going to run out of disk space pretty quickly.</p> </div> <p>You can also hot-reload the <code>log-level</code> by sending the <code>SIGHUP</code> signal to the process after editing the <code>server.yml</code> file. You can do so by calling <code>systemctl reload ntfy</code> (if ntfy is running inside systemd), or by calling <code>kill -HUP $(pidof ntfy)</code>. If successful, you'll see something like this:</p> <div class=highlight><pre><span></span><code>$ ntfy serve
 2022/06/02 10:29:28 INFO Listening on :2586[http] :1025[smtp], log level is INFO
