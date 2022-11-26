@@ -650,34 +650,34 @@ You left the house. Turn down the A/C?
     <span class=p>]</span>
 <span class=p>]));</span>
 </code></pre></div> </div> </div> </div> <p>The required/optional fields for each action depend on the type of the action itself. Please refer to <a href=#open-websiteapp><code>view</code> action</a>, <a href=#send-android-broadcast><code>broadcasst</code> action</a>, and <a href=#send-http-request><code>http</code> action</a> for details.</p> <h3 id=open-websiteapp>Open website/app<a class=headerlink href=#open-websiteapp title="Permanent link">&para;</a></h3> <p><em>Supported on:</em> <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M16.61 15.15c-.46 0-.84-.37-.84-.83s.38-.82.84-.82c.46 0 .84.36.84.82 0 .46-.38.83-.84.83m-9.2 0c-.46 0-.84-.37-.84-.83 0-.46.38-.82.84-.82.46 0 .83.36.83.82 0 .46-.37.83-.83.83m9.5-5.01 1.67-2.88c.09-.17.03-.38-.13-.47-.17-.1-.38-.04-.45.13l-1.71 2.91A10.15 10.15 0 0 0 12 8.91c-1.53 0-3 .33-4.27.91L6.04 6.91a.334.334 0 0 0-.47-.13c-.17.09-.22.3-.13.47l1.66 2.88C4.25 11.69 2.29 14.58 2 18h20c-.28-3.41-2.23-6.3-5.09-7.86Z"/></svg></span> <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11Z"/></svg></span> <span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M6.85 6.74c.01 0 .01 0 0 0M21.28 8.6c-.43-1.05-1.32-2.18-2.01-2.54.56 1.11.89 2.22 1.02 3.04v.02c-1.13-2.82-3.05-3.96-4.62-6.44-.08-.12-.17-.25-.24-.38-.04-.07-.07-.14-.11-.21-.06-.13-.12-.26-.15-.4 0-.01-.01-.02-.02-.02h-.03c-2.22 1.3-3.15 3.59-3.38 5.04-.69.04-1.37.21-1.99.51-.12.05-.17.19-.13.31.05.14.21.21.34.15.54-.26 1.14-.41 1.74-.45h.05c.08-.01.17-.01.25-.01.5-.01.97.06 1.44.2l.06.02c.1.02.17.06.25.06.05.04.11.06.16.08l.14.06c.07.03.14.06.2.09.03.02.06.03.09.05.07.04.16.07.2.11.04.02.08.05.12.07.73.45 1.34 1.07 1.75 1.81-.53-.37-1.49-.74-2.41-.58 3.6 1.81 2.63 8-2.36 7.76-.44-.01-.88-.1-1.3-.25-.1-.03-.2-.07-.29-.12-.05-.02-.12-.05-.17-.08-1.23-.63-2.24-1.82-2.38-3.27 0 0 .5-1.73 3.33-1.73.31 0 1.17-.86 1.2-1.1 0-.09-1.74-.78-2.42-1.45-.37-.36-.54-.53-.69-.66-.08-.07-.17-.13-.26-.19a4.63 4.63 0 0 1-.03-2.45C7.6 6.12 6.8 6.86 6.22 7.5c-.4-.5-.37-2.15-.35-2.5-.01 0-.3.16-.33.18-.35.25-.68.53-.98.82-.35.37-.66.74-.94 1.14-.62.91-1.12 1.95-1.34 3.04 0 .01-.1.41-.17.92l-.03.23c-.02.17-.04.32-.08.58v.41c0 5.53 4.5 10.01 10 10.01 4.97 0 9.08-3.59 9.88-8.33.02-.11.03-.24.05-.37.2-1.72-.02-3.52-.65-5.03Z"/></svg></span></p> <p>The <code>view</code> action <strong>opens a website or app when the action button is tapped</strong>, e.g. a browser, a Google Maps location, or even a deep link into Twitter or a show ntfy topic. How exactly the action is handled depends on how Android and your desktop browser treat the links. Normally it'll just open a link in the browser. </p> <p>Examples:</p> <ul> <li><code>http://</code> or <code>https://</code> will open your browser (or an app if it registered for a URL)</li> <li><code>mailto:</code> links will open your mail app, e.g. <code>mailto:phil@example.com</code></li> <li><code>geo:</code> links will open Google Maps, e.g. <code>geo:0,0?q=1600+Amphitheatre+Parkway,+Mountain+View,+CA</code></li> <li><code>ntfy://</code> links will open ntfy (see <a href=../subscribe/phone/#ntfy-links>ntfy:// links</a>), e.g. <code>ntfy://ntfy.sh/stats</code></li> <li><code>twitter://</code> links will open Twitter, e.g. <code>twitter://user?screen_name=..</code></li> <li>...</li> </ul> <p>Here's an example using the <a href=#using-a-header><code>X-Actions</code> header</a>:</p> <div class="tabbed-set tabbed-alternate" data-tabs=14:8><input checked=checked id=__tabbed_14_1 name=__tabbed_14 type=radio><input id=__tabbed_14_2 name=__tabbed_14 type=radio><input id=__tabbed_14_3 name=__tabbed_14 type=radio><input id=__tabbed_14_4 name=__tabbed_14 type=radio><input id=__tabbed_14_5 name=__tabbed_14 type=radio><input id=__tabbed_14_6 name=__tabbed_14 type=radio><input id=__tabbed_14_7 name=__tabbed_14 type=radio><input id=__tabbed_14_8 name=__tabbed_14 type=radio><div class=tabbed-labels><label for=__tabbed_14_1>Command line (curl)</label><label for=__tabbed_14_2>ntfy CLI</label><label for=__tabbed_14_3>HTTP</label><label for=__tabbed_14_4>JavaScript</label><label for=__tabbed_14_5>Go</label><label for=__tabbed_14_6>PowerShell</label><label for=__tabbed_14_7>Python</label><label for=__tabbed_14_8>PHP</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code>curl \
-    -d &quot;Somebody retweetet your tweet.&quot; \
+    -d &quot;Somebody retweeted your tweet.&quot; \
     -H &quot;Actions: view, Open Twitter, https://twitter.com/binwiederhier/status/1467633927951163392&quot; \
 ntfy.sh/myhome
 </code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code>ntfy publish \
     --actions=&quot;view, Open Twitter, https://twitter.com/binwiederhier/status/1467633927951163392&quot; \
     myhome \
-    &quot;Somebody retweetet your tweet.&quot;
+    &quot;Somebody retweeted your tweet.&quot;
 </code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=nf>POST</span> <span class=nn>/myhome</span> <span class=kr>HTTP</span><span class=o>/</span><span class=m>1.1</span>
 <span class=na>Host</span><span class=o>:</span> <span class=l>ntfy.sh</span>
 <span class=na>Actions</span><span class=o>:</span> <span class=l>view, Open Twitter, https://twitter.com/binwiederhier/status/1467633927951163392</span>
 
-Somebody retweetet your tweet.
+Somebody retweeted your tweet.
 </code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=nx>fetch</span><span class=p>(</span><span class=s1>&#39;https://ntfy.sh/myhome&#39;</span><span class=p>,</span><span class=w> </span><span class=p>{</span><span class=w></span>
 <span class=w>    </span><span class=nx>method</span><span class=o>:</span><span class=w> </span><span class=s1>&#39;POST&#39;</span><span class=p>,</span><span class=w></span>
-<span class=w>    </span><span class=nx>body</span><span class=o>:</span><span class=w> </span><span class=s1>&#39;Somebody retweetet your tweet.&#39;</span><span class=p>,</span><span class=w></span>
+<span class=w>    </span><span class=nx>body</span><span class=o>:</span><span class=w> </span><span class=s1>&#39;Somebody retweeted your tweet.&#39;</span><span class=p>,</span><span class=w></span>
 <span class=w>    </span><span class=nx>headers</span><span class=o>:</span><span class=w> </span><span class=p>{</span><span class=w> </span>
 <span class=w>        </span><span class=s1>&#39;Actions&#39;</span><span class=o>:</span><span class=w> </span><span class=s1>&#39;view, Open Twitter, https://twitter.com/binwiederhier/status/1467633927951163392&#39;</span><span class=w> </span>
 <span class=w>    </span><span class=p>}</span><span class=w></span>
 <span class=p>})</span><span class=w></span>
-</code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=nx>req</span><span class=p>,</span><span class=w> </span><span class=nx>_</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>http</span><span class=p>.</span><span class=nx>NewRequest</span><span class=p>(</span><span class=s>&quot;POST&quot;</span><span class=p>,</span><span class=w> </span><span class=s>&quot;https://ntfy.sh/myhome&quot;</span><span class=p>,</span><span class=w> </span><span class=nx>strings</span><span class=p>.</span><span class=nx>NewReader</span><span class=p>(</span><span class=s>&quot;Somebody retweetet your tweet.&quot;</span><span class=p>))</span><span class=w></span>
+</code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=nx>req</span><span class=p>,</span><span class=w> </span><span class=nx>_</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>http</span><span class=p>.</span><span class=nx>NewRequest</span><span class=p>(</span><span class=s>&quot;POST&quot;</span><span class=p>,</span><span class=w> </span><span class=s>&quot;https://ntfy.sh/myhome&quot;</span><span class=p>,</span><span class=w> </span><span class=nx>strings</span><span class=p>.</span><span class=nx>NewReader</span><span class=p>(</span><span class=s>&quot;Somebody retweeted your tweet.&quot;</span><span class=p>))</span><span class=w></span>
 <span class=nx>req</span><span class=p>.</span><span class=nx>Header</span><span class=p>.</span><span class=nx>Set</span><span class=p>(</span><span class=s>&quot;Actions&quot;</span><span class=p>,</span><span class=w> </span><span class=s>&quot;view, Open Twitter, https://twitter.com/binwiederhier/status/1467633927951163392&quot;</span><span class=p>)</span><span class=w></span>
 <span class=nx>http</span><span class=p>.</span><span class=nx>DefaultClient</span><span class=p>.</span><span class=nx>Do</span><span class=p>(</span><span class=nx>req</span><span class=p>)</span><span class=w></span>
 </code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=nv>$uri</span> <span class=p>=</span> <span class=s2>&quot;https://ntfy.sh/myhome&quot;</span>
 <span class=nv>$headers</span> <span class=p>=</span> <span class=p>@{</span> <span class=n>Actions</span><span class=p>=</span><span class=s2>&quot;view, Open Twitter, https://twitter.com/binwiederhier/status/1467633927951163392&quot;</span> <span class=p>}</span>
-<span class=nv>$body</span> <span class=p>=</span> <span class=s2>&quot;Somebody retweetet your tweet.&quot;</span>
+<span class=nv>$body</span> <span class=p>=</span> <span class=s2>&quot;Somebody retweeted your tweet.&quot;</span>
 <span class=nb>Invoke-RestMethod</span> <span class=n>-Method</span> <span class=s1>&#39;Post&#39;</span> <span class=n>-Uri</span> <span class=nv>$uri</span> <span class=n>-Headers</span> <span class=nv>$headers</span> <span class=n>-Body</span> <span class=nv>$body</span> <span class=n>-UseBasicParsing</span>
 </code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=n>requests</span><span class=o>.</span><span class=n>post</span><span class=p>(</span><span class=s2>&quot;https://ntfy.sh/myhome&quot;</span><span class=p>,</span>
-    <span class=n>data</span><span class=o>=</span><span class=s2>&quot;Somebody retweetet your tweet.&quot;</span><span class=p>,</span>
+    <span class=n>data</span><span class=o>=</span><span class=s2>&quot;Somebody retweeted your tweet.&quot;</span><span class=p>,</span>
     <span class=n>headers</span><span class=o>=</span><span class=p>{</span> <span class=s2>&quot;Actions&quot;</span><span class=p>:</span> <span class=s2>&quot;view, Open Twitter, https://twitter.com/binwiederhier/status/1467633927951163392&quot;</span> <span class=p>})</span>
 </code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=nb>file_get_contents</span><span class=p>(</span><span class=s1>&#39;https://ntfy.sh/reddit_alerts&#39;</span><span class=p>,</span> <span class=k>false</span><span class=p>,</span> <span class=nb>stream_context_create</span><span class=p>([</span>
     <span class=s1>&#39;http&#39;</span> <span class=o>=&gt;</span> <span class=p>[</span>
@@ -685,13 +685,13 @@ Somebody retweetet your tweet.
         <span class=s1>&#39;header&#39;</span> <span class=o>=&gt;</span>
             <span class=s2>&quot;Content-Type: text/plain</span><span class=se>\r\n</span><span class=s2>&quot;</span> <span class=o>.</span>
             <span class=s2>&quot;Actions: view, Open Twitter, https://twitter.com/binwiederhier/status/1467633927951163392&quot;</span><span class=p>,</span>
-        <span class=s1>&#39;content&#39;</span> <span class=o>=&gt;</span> <span class=s1>&#39;Somebody retweetet your tweet.&#39;</span>
+        <span class=s1>&#39;content&#39;</span> <span class=o>=&gt;</span> <span class=s1>&#39;Somebody retweeted your tweet.&#39;</span>
     <span class=p>]</span>
 <span class=p>]));</span>
 </code></pre></div> </div> </div> </div> <p>And the same example using <a href=#publish-as-json>JSON publishing</a>:</p> <div class="tabbed-set tabbed-alternate" data-tabs=15:8><input checked=checked id=__tabbed_15_1 name=__tabbed_15 type=radio><input id=__tabbed_15_2 name=__tabbed_15 type=radio><input id=__tabbed_15_3 name=__tabbed_15 type=radio><input id=__tabbed_15_4 name=__tabbed_15 type=radio><input id=__tabbed_15_5 name=__tabbed_15 type=radio><input id=__tabbed_15_6 name=__tabbed_15 type=radio><input id=__tabbed_15_7 name=__tabbed_15 type=radio><input id=__tabbed_15_8 name=__tabbed_15 type=radio><div class=tabbed-labels><label for=__tabbed_15_1>Command line (curl)</label><label for=__tabbed_15_2>ntfy CLI</label><label for=__tabbed_15_3>HTTP</label><label for=__tabbed_15_4>JavaScript</label><label for=__tabbed_15_5>Go</label><label for=__tabbed_15_6>PowerShell</label><label for=__tabbed_15_7>Python</label><label for=__tabbed_15_8>PHP</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code>curl ntfy.sh \
   -d &#39;{
     &quot;topic&quot;: &quot;myhome&quot;,
-    &quot;message&quot;: &quot;Somebody retweetet your tweet.&quot;,
+    &quot;message&quot;: &quot;Somebody retweeted your tweet.&quot;,
     &quot;actions&quot;: [
       {
         &quot;action&quot;: &quot;view&quot;,
@@ -709,13 +709,13 @@ Somebody retweetet your tweet.
         }
     ]&#39; \
     myhome \
-    &quot;Somebody retweetet your tweet.&quot;
+    &quot;Somebody retweeted your tweet.&quot;
 </code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=nf>POST</span> <span class=nn>/</span> <span class=kr>HTTP</span><span class=o>/</span><span class=m>1.1</span>
 <span class=na>Host</span><span class=o>:</span> <span class=l>ntfy.sh</span>
 
 {
     &quot;topic&quot;: &quot;myhome&quot;,
-    &quot;message&quot;: &quot;Somebody retweetet your tweet.&quot;,
+    &quot;message&quot;: &quot;Somebody retweeted your tweet.&quot;,
     &quot;actions&quot;: [
       {
         &quot;action&quot;: &quot;view&quot;,
@@ -728,7 +728,7 @@ Somebody retweetet your tweet.
 <span class=w>    </span><span class=nx>method</span><span class=o>:</span><span class=w> </span><span class=s1>&#39;POST&#39;</span><span class=p>,</span><span class=w></span>
 <span class=w>    </span><span class=nx>body</span><span class=o>:</span><span class=w> </span><span class=nb>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>({</span><span class=w></span>
 <span class=w>        </span><span class=nx>topic</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;myhome&quot;</span><span class=p>,</span><span class=w></span>
-<span class=w>        </span><span class=nx>message</span><span class=s2>&quot;: &quot;</span><span class=nx>Somebody</span><span class=w> </span><span class=nx>retweetet</span><span class=w> </span><span class=nx>your</span><span class=w> </span><span class=nx>tweet</span><span class=p>.</span><span class=s2>&quot;,</span>
+<span class=w>        </span><span class=nx>message</span><span class=s2>&quot;: &quot;</span><span class=nx>Somebody</span><span class=w> </span><span class=nx>retweeted</span><span class=w> </span><span class=nx>your</span><span class=w> </span><span class=nx>tweet</span><span class=p>.</span><span class=s2>&quot;,</span>
 <span class=s2>        actions: [</span>
 <span class=s2>            {</span>
 <span class=s2>                action: &quot;</span><span class=nx>view</span><span class=s2>&quot;,</span>
@@ -743,7 +743,7 @@ Somebody retweetet your tweet.
 
 <span class=nx>body</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=s>`{</span>
 <span class=s>    &quot;topic&quot;: &quot;myhome&quot;,</span>
-<span class=s>    &quot;message&quot;: &quot;Somebody retweetet your tweet.&quot;,</span>
+<span class=s>    &quot;message&quot;: &quot;Somebody retweeted your tweet.&quot;,</span>
 <span class=s>    &quot;actions&quot;: [</span>
 <span class=s>      {</span>
 <span class=s>        &quot;action&quot;: &quot;view&quot;,</span>
@@ -757,7 +757,7 @@ Somebody retweetet your tweet.
 </code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=nv>$uri</span> <span class=p>=</span> <span class=s2>&quot;https://ntfy.sh&quot;</span>
 <span class=nv>$body</span> <span class=p>=</span> <span class=p>@{</span>
     <span class=n>topic</span> <span class=p>=</span> <span class=s2>&quot;myhome&quot;</span>
-    <span class=n>message</span> <span class=p>=</span> <span class=s2>&quot;Somebody retweetet your tweet.&quot;</span>
+    <span class=n>message</span> <span class=p>=</span> <span class=s2>&quot;Somebody retweeted your tweet.&quot;</span>
     <span class=n>actions</span> <span class=p>=</span> <span class=p>@(</span>
         <span class=p>@{</span>
             <span class=s2>&quot;action&quot;</span><span class=p>=</span><span class=s2>&quot;view&quot;</span>
@@ -770,7 +770,7 @@ Somebody retweetet your tweet.
 </code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=n>requests</span><span class=o>.</span><span class=n>post</span><span class=p>(</span><span class=s2>&quot;https://ntfy.sh/&quot;</span><span class=p>,</span>
     <span class=n>data</span><span class=o>=</span><span class=n>json</span><span class=o>.</span><span class=n>dumps</span><span class=p>({</span>
         <span class=s2>&quot;topic&quot;</span><span class=p>:</span> <span class=s2>&quot;myhome&quot;</span><span class=p>,</span>
-        <span class=s2>&quot;message&quot;</span><span class=p>:</span> <span class=s2>&quot;Somebody retweetet your tweet.&quot;</span><span class=p>,</span>
+        <span class=s2>&quot;message&quot;</span><span class=p>:</span> <span class=s2>&quot;Somebody retweeted your tweet.&quot;</span><span class=p>,</span>
         <span class=s2>&quot;actions&quot;</span><span class=p>:</span> <span class=p>[</span>
             <span class=p>{</span>
                 <span class=s2>&quot;action&quot;</span><span class=p>:</span> <span class=s2>&quot;view&quot;</span><span class=p>,</span>
@@ -786,7 +786,7 @@ Somebody retweetet your tweet.
         <span class=s1>&#39;header&#39;</span> <span class=o>=&gt;</span> <span class=s2>&quot;Content-Type: application/json&quot;</span><span class=p>,</span>
         <span class=s1>&#39;content&#39;</span> <span class=o>=&gt;</span> <span class=nb>json_encode</span><span class=p>([</span>
             <span class=s2>&quot;topic&quot;</span><span class=o>:</span> <span class=s2>&quot;myhome&quot;</span><span class=p>,</span>
-            <span class=s2>&quot;message&quot;</span><span class=o>:</span> <span class=s2>&quot;Somebody retweetet your tweet.&quot;</span><span class=p>,</span>
+            <span class=s2>&quot;message&quot;</span><span class=o>:</span> <span class=s2>&quot;Somebody retweeted your tweet.&quot;</span><span class=p>,</span>
             <span class=s2>&quot;actions&quot;</span><span class=o>:</span> <span class=p>[</span>
                 <span class=p>[</span>
                     <span class=s2>&quot;action&quot;</span><span class=o>:</span> <span class=s2>&quot;view&quot;</span><span class=p>,</span>
