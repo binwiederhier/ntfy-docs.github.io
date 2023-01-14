@@ -181,7 +181,7 @@ ENTRYPOINT [&quot;ntfy&quot;, &quot;serve&quot;]
 <span class=w>      </span><span class=nt>containers</span><span class=p>:</span>
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ntfy</span>
 <span class=w>        </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">binwiederhier/ntfy</span>
-<span class=w>        </span><span class=nt>args</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">[</span><span class=s>&quot;serve&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;--cache-file</span><span class=nv> </span><span class=s>/var/cache/ntfy/cache.db&quot;</span><span class="p p-Indicator">]</span>
+<span class=w>        </span><span class=nt>args</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">[</span><span class=s>&quot;serve&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;--cache-file&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;/var/cache/ntfy/cache.db&quot;</span><span class="p p-Indicator">]</span>
 <span class=w>        </span><span class=nt>ports</span><span class=p>:</span>
 <span class=w>        </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>containerPort</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
 <span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
@@ -189,6 +189,8 @@ ENTRYPOINT [&quot;ntfy&quot;, &quot;serve&quot;]
 <span class=w>        </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">config</span>
 <span class=w>          </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=s>&quot;/etc/ntfy&quot;</span>
 <span class=w>          </span><span class=nt>readOnly</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class=w>        </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">cache</span>
+<span class=w>          </span><span class=nt>mountPath</span><span class=p>:</span><span class=w> </span><span class=s>&quot;/var/cache/ntfy&quot;</span>
 <span class=w>      </span><span class=nt>volumes</span><span class=p>:</span>
 <span class=w>        </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">config</span>
 <span class=w>          </span><span class=nt>configMap</span><span class=p>:</span>
