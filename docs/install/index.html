@@ -134,7 +134,7 @@ ntfy<span class=w> </span>--help
 <span class=w>  </span>-it<span class=w> </span><span class=se>\</span>
 <span class=w>  </span>binwiederhier/ntfy<span class=w> </span><span class=se>\</span>
 <span class=w>  </span>serve
-</code></pre></div></p> <p>Using docker-compose with non-root user: <div class=highlight><pre><span></span><code><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=s>&quot;2.1&quot;</span>
+</code></pre></div></p> <p>Using docker-compose with non-root user and healthchecks enabled: <div class=highlight><pre><span></span><code><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=s>&quot;2.1&quot;</span>
 
 <span class=nt>services</span><span class=p>:</span>
 <span class=w>  </span><span class=nt>ntfy</span><span class=p>:</span>
@@ -150,6 +150,12 @@ ntfy<span class=w> </span>--help
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">/etc/ntfy:/etc/ntfy</span>
 <span class=w>    </span><span class=nt>ports</span><span class=p>:</span>
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">80:80</span>
+<span class=w>    </span><span class=nt>healthcheck</span><span class=p>:</span><span class=w> </span><span class=c1># optional: remember to adapt the host:port to your environment</span>
+<span class=w>        </span><span class=nt>test</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">[</span><span class=s>&quot;CMD-SHELL&quot;</span><span class="p p-Indicator">,</span><span class=w> </span><span class=s>&quot;wget</span><span class=nv> </span><span class=s>-q</span><span class=nv> </span><span class=s>--tries=1</span><span class=nv> </span><span class=s>http://localhost:80/v1/health</span><span class=nv> </span><span class=s>-O</span><span class=nv> </span><span class=s>-</span><span class=nv> </span><span class=s>|</span><span class=nv> </span><span class=s>grep</span><span class=nv> </span><span class=s>-Eo</span><span class=nv> </span><span class=s>&#39;\&quot;healthy\&quot;\\s*:\\s*true&#39;</span><span class=nv> </span><span class=s>||</span><span class=nv> </span><span class=s>exit</span><span class=nv> </span><span class=s>1&quot;</span><span class="p p-Indicator">]</span>
+<span class=w>        </span><span class=nt>interval</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">60s</span>
+<span class=w>        </span><span class=nt>timeout</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">10s</span>
+<span class=w>        </span><span class=nt>retries</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class=w>        </span><span class=nt>start_period</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">40s</span>
 <span class=w>    </span><span class=nt>restart</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
 </code></pre></div></p> <p>If using a non-root user when running the docker version, be sure to chown the server.yml, user.db, and cache.db files and attachments directory to the same uid/gid.</p> <p>Alternatively, you may wish to build a customized Docker image that can be run with fewer command-line arguments and without delivering the configuration file separately. <div class=highlight><pre><span></span><code>FROM binwiederhier/ntfy
 COPY server.yml /etc/ntfy/server.yml
