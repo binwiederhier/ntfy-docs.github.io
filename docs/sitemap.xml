@@ -2,92 +2,92 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://ntfy.sh/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/config/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/deprecations/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/develop/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/emojis/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/examples/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/faq/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/install/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/integrations/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/known-issues/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/privacy/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/publish/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/releases/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/troubleshooting/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/subscribe/api/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/subscribe/cli/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/subscribe/phone/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ntfy.sh/subscribe/web/</loc>
-         <lastmod>2023-05-14</lastmod>
+         <lastmod>2023-05-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
