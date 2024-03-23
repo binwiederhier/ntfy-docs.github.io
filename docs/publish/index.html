@@ -1701,11 +1701,13 @@ Look ma, with auth
 <span class=nx>req</span><span class=p>.</span><span class=nx>Header</span><span class=p>.</span><span class=nx>Set</span><span class=p>(</span><span class=s>&quot;Authorization&quot;</span><span class=p>,</span><span class=w> </span><span class=s>&quot;Bearer tk_AgQdq7mVBoFD37zQVN29RhuMzNIz2&quot;</span><span class=p>)</span>
 <span class=nx>http</span><span class=p>.</span><span class=nx>DefaultClient</span><span class=p>.</span><span class=nx>Do</span><span class=p>(</span><span class=nx>req</span><span class=p>)</span>
 </code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=c># With PowerShell 7 or greater, we can use the Authentication and Token parameters</span>
+<span class=c># The Token parameter must be in the form of a System.Security.SecureString</span>
+
 <span class=nv>$Request</span> <span class=p>=</span> <span class=p>@{</span>
   <span class=n>Method</span> <span class=p>=</span> <span class=s2>&quot;POST&quot;</span>
   <span class=n>URI</span> <span class=p>=</span> <span class=s2>&quot;https://ntfy.example.com/mysecrets&quot;</span>
-  <span class=n>Authorization</span> <span class=p>=</span> <span class=s2>&quot;Bearer&quot;</span>
-  <span class=n>Token</span> <span class=p>=</span> <span class=s2>&quot;tk_AgQdq7mVBoFD37zQVN29RhuMzNIz2&quot;</span>
+  <span class=n>Authentication</span> <span class=p>=</span> <span class=s2>&quot;Bearer&quot;</span>
+  <span class=n>Token</span> <span class=p>=</span> <span class=nb>ConvertTo-SecureString</span> <span class=s2>&quot;tk_AgQdq7mVBoFD37zQVN29RhuMzNIz2&quot;</span> <span class=n>-AsPlainText</span>
   <span class=n>Body</span> <span class=p>=</span> <span class=s2>&quot;Look ma, with auth&quot;</span>
 <span class=p>}</span>
 <span class=nb>Invoke-RestMethod</span> <span class=nv>@Request</span>
