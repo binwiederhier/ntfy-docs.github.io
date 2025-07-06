@@ -66,8 +66,7 @@
 <span class=nt>smtp-server-domain</span><span class=p>:</span><span class=w> </span><span class=s>&quot;ntfy.sh&quot;</span>
 <span class=nt>smtp-server-addr-prefix</span><span class=p>:</span><span class=w> </span><span class=s>&quot;ntfy-&quot;</span>
 <span class=nt>keepalive-interval</span><span class=p>:</span><span class=w> </span><span class=s>&quot;45s&quot;</span>
-</code></pre></div> </div> </div> </div> <p>Alternatively, you can also use command line arguments or environment variables to configure the server. Here's an example using Docker Compose (i.e. <code>docker-compose.yml</code>):</p> <div class="tabbed-set tabbed-alternate" data-tabs=2:2><input checked=checked id=__tabbed_2_1 name=__tabbed_2 type=radio><input id=__tabbed_2_2 name=__tabbed_2 type=radio><div class=tabbed-labels><label for=__tabbed_2_1>Docker Compose (w/ auth, cache, attachments)</label><label for=__tabbed_2_2>Docker Compose (w/ auth, cache, web push, iOS)</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=s>&#39;3&#39;</span>
-<span class=nt>services</span><span class=p>:</span>
+</code></pre></div> </div> </div> </div> <p>Alternatively, you can also use command line arguments or environment variables to configure the server. Here's an example using Docker Compose (i.e. <code>docker-compose.yml</code>):</p> <div class="tabbed-set tabbed-alternate" data-tabs=2:2><input checked=checked id=__tabbed_2_1 name=__tabbed_2 type=radio><input id=__tabbed_2_2 name=__tabbed_2 type=radio><div class=tabbed-labels><label for=__tabbed_2_1>Docker Compose (w/ auth, cache, attachments)</label><label for=__tabbed_2_2>Docker Compose (w/ auth, cache, web push, iOS)</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=nt>services</span><span class=p>:</span>
 <span class=w>  </span><span class=nt>ntfy</span><span class=p>:</span>
 <span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">binwiederhier/ntfy</span>
 <span class=w>    </span><span class=nt>restart</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
@@ -84,8 +83,7 @@
 <span class=w>    </span><span class=nt>ports</span><span class=p>:</span>
 <span class=w>      </span><span class="p p-Indicator">-</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">80:80</span>
 <span class=w>    </span><span class=nt>command</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">serve</span>
-</code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=s>&#39;3&#39;</span>
-<span class=nt>services</span><span class=p>:</span>
+</code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=nt>services</span><span class=p>:</span>
 <span class=w>  </span><span class=nt>ntfy</span><span class=p>:</span>
 <span class=w>    </span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">binwiederhier/ntfy</span>
 <span class=w>    </span><span class=nt>restart</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">unless-stopped</span>
