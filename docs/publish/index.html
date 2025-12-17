@@ -373,8 +373,8 @@ Look ma, **bold text**, *italics*, ...
 <span class=p>}</span>
 <span class=nb>Invoke-RestMethod</span> <span class=nv>@Request</span>
 </code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=n>requests</span><span class=o>.</span><span class=n>post</span><span class=p>(</span><span class=s2>&quot;https://ntfy.sh/mytopic&quot;</span><span class=p>,</span> 
-    <span class=n>data</span><span class=o>=</span><span class=s2>&quot;Look ma, **bold text**, *italics*, ...&quot;</span>
-    <span class=n>headers</span><span class=o>=</span><span class=p>{</span> <span class=s2>&quot;Markdown&quot;</span><span class=p>:</span> <span class=s2>&quot;yes&quot;</span> <span class=p>}))</span>
+    <span class=n>data</span><span class=o>=</span><span class=s2>&quot;Look ma, **bold text**, *italics*, ...&quot;</span><span class=p>,</span>
+    <span class=n>headers</span><span class=o>=</span><span class=p>{</span> <span class=s2>&quot;Markdown&quot;</span><span class=p>:</span> <span class=s2>&quot;yes&quot;</span> <span class=p>})</span>
 </code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=nb>file_get_contents</span><span class=p>(</span><span class=s1>&#39;https://ntfy.sh/mytopic&#39;</span><span class=p>,</span> <span class=k>false</span><span class=p>,</span> <span class=nb>stream_context_create</span><span class=p>([</span>
     <span class=s1>&#39;http&#39;</span> <span class=o>=&gt;</span> <span class=p>[</span>
         <span class=s1>&#39;method&#39;</span> <span class=o>=&gt;</span> <span class=s1>&#39;POST&#39;</span><span class=p>,</span> <span class=c1>// PUT also works</span>
