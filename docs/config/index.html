@@ -308,7 +308,7 @@ $ dig A mx1.ntfy.sh +short
 <span class=c1>#</span>
 <span class=nt>visitor-prefix-bits-ipv4</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">24</span>
 <span class=nt>visitor-prefix-bits-ipv6</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">48</span>
-</code></pre></div> </div> </div> </div> <h3 id=tlsssl>TLS/SSL<a class=headerlink href=#tlsssl title="Permanent link">&para;</a></h3> <p>ntfy supports HTTPS/TLS by setting the <code>listen-https</code> <a href=#config-options>config option</a>. However, if you are behind a proxy, it is recommended that TLS/SSL termination is done by the proxy itself (see below).</p> <p>I highly recommend using <a href=https://certbot.eff.org/ >certbot</a>. I use it with the <a href=https://certbot-dns-route53.readthedocs.io/en/stable/ >dns-route53 plugin</a>, which lets you use <a href=https://aws.amazon.com/route53/ >AWS Route 53</a> as the challenge. That's much easier than using the HTTP challenge. I've found <a href=https://nandovieira.com/using-lets-encrypt-in-development-with-nginx-and-aws-route53>this guide</a> to be incredibly helpful.</p> <h3 id=nginxapache2caddy>nginx/Apache2/caddy<a class=headerlink href=#nginxapache2caddy title="Permanent link">&para;</a></h3> <p>For your convenience, here's a working config that'll help configure things behind a proxy. Be sure to <strong>enable WebSockets</strong> by forwarding the <code>Connection</code> and <code>Upgrade</code> headers accordingly. </p> <p>In this example, ntfy runs on <code>:2586</code> and we proxy traffic to it. We also redirect HTTP to HTTPS for GET requests against a topic or the root domain:</p> <div class="tabbed-set tabbed-alternate" data-tabs=14:4><input checked=checked id=__tabbed_14_1 name=__tabbed_14 type=radio><input id=__tabbed_14_2 name=__tabbed_14 type=radio><input id=__tabbed_14_3 name=__tabbed_14 type=radio><input id=__tabbed_14_4 name=__tabbed_14 type=radio><div class=tabbed-labels><label for=__tabbed_14_1>nginx (convenient)</label><label for=__tabbed_14_2>nginx (more secure)</label><label for=__tabbed_14_3>Apache2</label><label for=__tabbed_14_4>caddy</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code># /etc/nginx/sites-*/ntfy
+</code></pre></div> </div> </div> </div> <h3 id=tlsssl>TLS/SSL<a class=headerlink href=#tlsssl title="Permanent link">&para;</a></h3> <p>ntfy supports HTTPS/TLS by setting the <code>listen-https</code> <a href=#config-options>config option</a>. However, if you are behind a proxy, it is recommended that TLS/SSL termination is done by the proxy itself (see below).</p> <p>I highly recommend using <a href=https://certbot.eff.org/ >certbot</a>. I use it with the <a href=https://certbot-dns-route53.readthedocs.io/en/stable/ >dns-route53 plugin</a>, which lets you use <a href=https://aws.amazon.com/route53/ >AWS Route 53</a> as the challenge. That's much easier than using the HTTP challenge. I've found <a href=https://nandovieira.com/using-lets-encrypt-in-development-with-nginx-and-aws-route53>this guide</a> to be incredibly helpful.</p> <h3 id=nginxapache2caddy>nginx/Apache2/caddy<a class=headerlink href=#nginxapache2caddy title="Permanent link">&para;</a></h3> <p>For your convenience, here's a working config that'll help configure things behind a proxy. Be sure to <strong>enable WebSockets</strong> by forwarding the <code>Connection</code> and <code>Upgrade</code> headers accordingly. </p> <p>In this example, ntfy runs on <code>:2586</code> and we proxy traffic to it. We also redirect HTTP to HTTPS for GET requests against a topic or the root domain:</p> <div class="tabbed-set tabbed-alternate" data-tabs=14:5><input checked=checked id=__tabbed_14_1 name=__tabbed_14 type=radio><input id=__tabbed_14_2 name=__tabbed_14 type=radio><input id=__tabbed_14_3 name=__tabbed_14 type=radio><input id=__tabbed_14_4 name=__tabbed_14 type=radio><input id=__tabbed_14_5 name=__tabbed_14 type=radio><div class=tabbed-labels><label for=__tabbed_14_1>nginx (convenient)</label><label for=__tabbed_14_2>nginx (more secure)</label><label for=__tabbed_14_3>Apache2</label><label for=__tabbed_14_4>caddy</label><label for=__tabbed_14_5>ferron</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code># /etc/nginx/sites-*/ntfy
 #
 # This config allows insecure HTTP POST/PUT requests against topics to allow a short curl syntax (without -L
 # and &quot;https://&quot; prefix). It also disables output buffering, which has worked well for the ntfy.sh server.
@@ -505,6 +505,32 @@ ntfy.sh, http://nfty.sh {
         path_regexp ^/([-_a-z0-9]{0,64}$|docs/|static/)
     }
     redir @httpget https://{host}{uri}
+}
+</code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code>// /etc/ferron.kdl  
+// Note that this config is most certainly incomplete. Please help out and let me know what&#39;s missing
+// via Discord/Matrix or in a GitHub issue.
+// Note: Ferron automatically handles both HTTP and WebSockets with proxy 
+
+ntfy.sh {
+    auto_tls
+    auto_tls_letsencrypt_production
+    protocols &quot;h1&quot; &quot;h2&quot; &quot;h3&quot;
+
+    proxy &quot;http://127.0.0.1:2586&quot;
+
+    // Redirect HTTP to HTTPS, but only for GET topic addresses, since we want
+    // it to work with curl without the annoying https:// prefix
+
+    no_redirect_to_https #true
+
+    condition &quot;is_get_topic&quot; {
+        is_equal &quot;{method}&quot; &quot;GET&quot;
+        is_regex &quot;{path}&quot; &quot;^/([-_a-z0-9]{0,64}$|docs/|static/)&quot;
+    }
+
+    if &quot;is_get_topic&quot; {
+          no_redirect_to_https #false
+    }
 }
 </code></pre></div> </div> </div> </div> <h2 id=firebase-fcm>Firebase (FCM)<a class=headerlink href=#firebase-fcm title="Permanent link">&para;</a></h2> <div class="admonition info"> <p class=admonition-title>Info</p> <p>Using Firebase is <strong>optional</strong> and only works if you modify and <a href=../develop/#android-app>build your own Android .apk</a>. For a self-hosted instance, it's easier to just not bother with FCM.</p> </div> <p><a href=https://firebase.google.com/docs/cloud-messaging>Firebase Cloud Messaging (FCM)</a> is the Google approved way to send push messages to Android devices. FCM is the only method that an Android app can receive messages without having to run a <a href=https://developer.android.com/guide/components/foreground-services>foreground service</a>.</p> <p>For the main host <a href=https://ntfy.sh>ntfy.sh</a>, the <a href=../subscribe/phone/ >ntfy Android app</a> uses Firebase to send messages to the device. For other hosts, instant delivery is used and FCM is not involved.</p> <p>To configure FCM for your self-hosted instance of the ntfy server, follow these steps:</p> <ol> <li>Sign up for a <a href=https://console.firebase.google.com/ >Firebase account</a></li> <li>Create a Firebase app and download the key file (e.g. <code>myapp-firebase-adminsdk-...json</code>)</li> <li>Place the key file in <code>/etc/ntfy</code>, set the <code>firebase-key-file</code> in <code>server.yml</code> accordingly and restart the ntfy server</li> <li>Build your own Android .apk following <a href=../develop/#android-app>these instructions</a></li> </ol> <p>Example: <div class=highlight><pre><span></span><code># If set, also publish messages to a Firebase Cloud Messaging (FCM) topic for your app.
 # This is optional and only required to support Android apps (which don&#39;t allow background services anymore).
