@@ -214,3 +214,30 @@ figure video {
     font-weight: 400;
     src: url('../fonts/roboto-mono-v22-latin-regular.woff2') format('woff2');
 }
+
+/* Community maintained badge */
+.community-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    background-color: rgba(51, 133, 116, 0.1);
+    border: 1px solid rgba(51, 133, 116, 0.3);
+    border-radius: 0.7em;
+    padding: 0.1em 0.7em;
+    font-size: 0.75rem;
+    color: #338574;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+}
+
+.community-badge svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+}
+
+body[data-md-color-scheme="slate"] .community-badge {
+    background-color: rgba(86, 189, 168, 0.15);
+    border-color: rgba(86, 189, 168, 0.4);
+    color: #56bda8;
+}
