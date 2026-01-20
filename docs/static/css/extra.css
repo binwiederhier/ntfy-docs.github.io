@@ -92,7 +92,7 @@ figure video {
 }
 
 .screenshots img {
-    max-height: 230px;
+    max-height: 350px;
     max-width: 350px;
     margin: 3px;
     border-radius: 5px;
