@@ -863,12 +863,12 @@ Somebody retweeted your tweet.
 <span class=w>    </span><span class=nx>method</span><span class=o>:</span><span class=w> </span><span class=s1>&#39;POST&#39;</span><span class=p>,</span>
 <span class=w>    </span><span class=nx>body</span><span class=o>:</span><span class=w> </span><span class=nb>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>({</span>
 <span class=w>        </span><span class=nx>topic</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;myhome&quot;</span><span class=p>,</span>
-<span class=w>        </span><span class=nx>message</span><span class=s2>&quot;: &quot;</span><span class=nx>Somebody</span><span class=w> </span><span class=nx>retweeted</span><span class=w> </span><span class=nx>your</span><span class=w> </span><span class=nx>tweet</span><span class=p>.</span><span class=s2>&quot;,</span>
-<span class=s2>        actions: [</span>
-<span class=s2>            {</span>
-<span class=s2>                action: &quot;</span><span class=nx>view</span><span class=s2>&quot;,</span>
-<span class=s2>                label: &quot;</span><span class=nx>Open</span><span class=w> </span><span class=nx>Twitter</span><span class=s2>&quot;,</span>
-<span class=s2>                url: &quot;</span><span class=nx>https</span><span class=o>:</span><span class=c1>//twitter.com/binwiederhier/status/1467633927951163392&quot;</span>
+<span class=w>        </span><span class=nx>message</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;Somebody retweeted your tweet.&quot;</span><span class=p>,</span>
+<span class=w>        </span><span class=nx>actions</span><span class=o>:</span><span class=w> </span><span class=p>[</span>
+<span class=w>            </span><span class=p>{</span>
+<span class=w>                </span><span class=nx>action</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;view&quot;</span><span class=p>,</span>
+<span class=w>                </span><span class=nx>label</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;Open Twitter&quot;</span><span class=p>,</span>
+<span class=w>                </span><span class=nx>url</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;https://twitter.com/binwiederhier/status/1467633927951163392&quot;</span>
 <span class=w>            </span><span class=p>}</span>
 <span class=w>        </span><span class=p>]</span>
 <span class=w>    </span><span class=p>})</span>
@@ -1029,14 +1029,14 @@ Your wife requested you send a picture of yourself.
 <span class=w>    </span><span class=nx>method</span><span class=o>:</span><span class=w> </span><span class=s1>&#39;POST&#39;</span><span class=p>,</span>
 <span class=w>    </span><span class=nx>body</span><span class=o>:</span><span class=w> </span><span class=nb>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>({</span>
 <span class=w>        </span><span class=nx>topic</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;wifey&quot;</span><span class=p>,</span>
-<span class=w>        </span><span class=nx>message</span><span class=s2>&quot;: &quot;</span><span class=nx>Your</span><span class=w> </span><span class=nx>wife</span><span class=w> </span><span class=nx>requested</span><span class=w> </span><span class=nx>you</span><span class=w> </span><span class=nx>send</span><span class=w> </span><span class=nx>a</span><span class=w> </span><span class=nx>picture</span><span class=w> </span><span class=k>of</span><span class=w> </span><span class=nx>yourself</span><span class=p>.</span><span class=s2>&quot;,</span>
-<span class=s2>        actions: [</span>
-<span class=s2>            {</span>
-<span class=s2>                &quot;</span><span class=nx>action</span><span class=s2>&quot;: &quot;</span><span class=nx>broadcast</span><span class=s2>&quot;,</span>
-<span class=s2>                &quot;</span><span class=nx>label</span><span class=s2>&quot;: &quot;</span><span class=nx>Take</span><span class=w> </span><span class=nx>picture</span><span class=s2>&quot;,</span>
-<span class=s2>                &quot;</span><span class=nx>extras</span><span class=s2>&quot;: {</span>
-<span class=s2>                    &quot;</span><span class=nx>cmd</span><span class=s2>&quot;: &quot;</span><span class=nx>pic</span><span class=s2>&quot;,</span>
-<span class=s2>                    &quot;</span><span class=nx>camera</span><span class=s2>&quot;: &quot;</span><span class=nx>front</span><span class=err>&quot;</span>
+<span class=w>        </span><span class=nx>message</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;Your wife requested you send a picture of yourself.&quot;</span><span class=p>,</span>
+<span class=w>        </span><span class=nx>actions</span><span class=o>:</span><span class=w> </span><span class=p>[</span>
+<span class=w>            </span><span class=p>{</span>
+<span class=w>                </span><span class=s2>&quot;action&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;broadcast&quot;</span><span class=p>,</span>
+<span class=w>                </span><span class=s2>&quot;label&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;Take picture&quot;</span><span class=p>,</span>
+<span class=w>                </span><span class=s2>&quot;extras&quot;</span><span class=o>:</span><span class=w> </span><span class=p>{</span>
+<span class=w>                    </span><span class=s2>&quot;cmd&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;pic&quot;</span><span class=p>,</span>
+<span class=w>                    </span><span class=s2>&quot;camera&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;front&quot;</span>
 <span class=w>                </span><span class=p>}</span>
 <span class=w>            </span><span class=p>}</span>
 <span class=w>        </span><span class=p>]</span>
@@ -1217,7 +1217,7 @@ Garage door has been open for 15 minutes. Close it?
 <span class=w>    </span><span class=nx>method</span><span class=o>:</span><span class=w> </span><span class=s1>&#39;POST&#39;</span><span class=p>,</span>
 <span class=w>    </span><span class=nx>body</span><span class=o>:</span><span class=w> </span><span class=nb>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>({</span>
 <span class=w>        </span><span class=nx>topic</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;myhome&quot;</span><span class=p>,</span>
-<span class=w>        </span><span class=s2>&quot;message&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;Garage door has been open for 15 minutes. Close it?&quot;</span><span class=p>,</span>
+<span class=w>        </span><span class=nx>message</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;Garage door has been open for 15 minutes. Close it?&quot;</span><span class=p>,</span>
 <span class=w>        </span><span class=nx>actions</span><span class=o>:</span><span class=w> </span><span class=p>[</span>
 <span class=w>          </span><span class=p>{</span>
 <span class=w>            </span><span class=s2>&quot;action&quot;</span><span class=o>:</span><span class=w> </span><span class=s2>&quot;http&quot;</span><span class=p>,</span>
