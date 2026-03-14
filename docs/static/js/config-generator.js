@@ -1034,10 +1034,7 @@
     // Re-prefill base-url
     const baseUrlInput = modal.querySelector("[data-key=\"base-url\"]");
     if (baseUrlInput) {
-      const host = window.location.hostname;
-      if (host && !host.includes("ntfy.sh")) {
-        baseUrlInput.value = "https://ntfy.example.com";
-      }
+      baseUrlInput.value = "https://ntfy.example.com";
     }
     // Reset to General tab
     switchPanel(modal, "cg-panel-general");
@@ -1322,13 +1319,10 @@
     setupFormListeners(els);
     setupWebPushEvents(els);
 
-    // Pre-fill base-url if not on ntfy.sh
+    // Pre-fill base-url
     const baseUrlInput = modal.querySelector("[data-key=\"base-url\"]");
     if (baseUrlInput && !baseUrlInput.value.trim()) {
-      const host = window.location.hostname;
-      if (host && !host.includes("ntfy.sh")) {
-        baseUrlInput.value = "https://ntfy.example.com";
-      }
+      baseUrlInput.value = "https://ntfy.example.com";
     }
 
     // Auto-open if URL hash points to config generator
