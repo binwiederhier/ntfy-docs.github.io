@@ -743,22 +743,111 @@ body[data-md-color-scheme="slate"] .cg-warning {
     border-color: #665200;
 }
 
+/* Mobile toggle bar (hidden on desktop) */
+.cg-mobile-toggle {
+    display: none;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     .cg-modal-dialog {
-        inset: 8px;
+        inset: 0;
+        border-radius: 0;
+    }
+
+    .cg-modal-header {
+        padding: 8px 16px;
+    }
+
+    .cg-modal-title {
+        font-size: 0.85rem;
+    }
+
+    .cg-modal-desc {
+        display: none;
     }
 
     .cg-modal-body {
         flex-direction: column;
     }
 
+    .cg-mobile-toggle {
+        display: flex;
+        flex-shrink: 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .cg-mobile-toggle-btn {
+        flex: 1;
+        padding: 8px 0;
+        border: none;
+        background: #f5f5f5;
+        font-size: 0.78rem;
+        font-weight: 500;
+        font-family: inherit;
+        color: #777;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+    }
+
+    .cg-mobile-toggle-btn.active {
+        background: #fff;
+        color: var(--md-primary-fg-color);
+        box-shadow: inset 0 -2px 0 var(--md-primary-fg-color);
+    }
+
     #cg-left {
         border-right: none;
-        border-bottom: 1px solid #ddd;
+        flex: 1;
+        min-height: 0;
     }
 
     #cg-right {
         flex: 1;
+        display: none;
+        min-height: 0;
     }
+
+    #cg-right.cg-mobile-active {
+        display: flex;
+    }
+
+    #cg-left.cg-mobile-hidden {
+        display: none;
+    }
+
+    .cg-nav {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .cg-inline-field {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+    }
+
+    .cg-inline-field > label {
+        width: 100%;
+    }
+
+    .cg-panel:not(#cg-panel-general) .cg-inline-field > label {
+        width: 100%;
+    }
+}
+
+/* Dark mode mobile toggle */
+body[data-md-color-scheme="slate"] .cg-mobile-toggle {
+    border-bottom-color: #444;
+}
+
+body[data-md-color-scheme="slate"] .cg-mobile-toggle-btn {
+    background: #2a2a3a;
+    color: #888;
+}
+
+body[data-md-color-scheme="slate"] .cg-mobile-toggle-btn.active {
+    background: #1e1e2e;
+    color: var(--md-primary-fg-color);
 }

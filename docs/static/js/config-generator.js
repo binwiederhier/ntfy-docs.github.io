@@ -1072,6 +1072,24 @@
         closeModal(els);
       }
     });
+
+    // Mobile toggle between Edit and Preview panels
+    const toggleBtns = modal.querySelectorAll(".cg-mobile-toggle-btn");
+    const leftPanel = document.getElementById("cg-left");
+    const rightPanel = document.getElementById("cg-right");
+    toggleBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        toggleBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        if (btn.dataset.show === "right") {
+          leftPanel.classList.add("cg-mobile-hidden");
+          rightPanel.classList.add("cg-mobile-active");
+        } else {
+          leftPanel.classList.remove("cg-mobile-hidden");
+          rightPanel.classList.remove("cg-mobile-active");
+        }
+      });
+    });
   }
 
   function setupAuthEvents(els) {
