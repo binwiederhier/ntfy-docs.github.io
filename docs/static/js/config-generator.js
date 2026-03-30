@@ -125,6 +125,7 @@
     { key: "smtp-sender-from", env: "NTFY_SMTP_SENDER_FROM", section: "smtp-out" },
     { key: "smtp-sender-user", env: "NTFY_SMTP_SENDER_USER", section: "smtp-out" },
     { key: "smtp-sender-pass", env: "NTFY_SMTP_SENDER_PASS", section: "smtp-out" },
+    { key: "smtp-sender-verify", env: "NTFY_SMTP_SENDER_VERIFY", section: "smtp-out", type: "bool" },
     { key: "smtp-server-listen", env: "NTFY_SMTP_SERVER_LISTEN", section: "smtp-in" },
     { key: "smtp-server-domain", env: "NTFY_SMTP_SERVER_DOMAIN", section: "smtp-in" },
     { key: "smtp-server-addr-prefix", env: "NTFY_SMTP_SERVER_ADDR_PREFIX", section: "smtp-in" },
@@ -171,6 +172,7 @@
       requireLoginHidden: modal.querySelector("#cg-require-login-hidden"),
       signupHidden: modal.querySelector("#cg-enable-signup-hidden"),
       proxyCheckbox: modal.querySelector("#cg-behind-proxy"),
+      smtpSenderVerifyHidden: modal.querySelector("#cg-smtp-sender-verify-hidden"),
       dbStep: modal.querySelector("#cg-wizard-db"),
       navDb: modal.querySelector("#cg-nav-database"),
       navEmail: modal.querySelector("#cg-nav-email"),
@@ -742,6 +744,10 @@
 
     const signupYes = modal.querySelector("input[name=\"cg-enable-signup\"][value=\"yes\"]");
     if (signupYes && signupHidden) signupHidden.checked = signupYes.checked;
+
+    // SMTP sender verify radio → hidden checkbox
+    const smtpVerifyYes = modal.querySelector("input[name=\"cg-smtp-sender-verify\"][value=\"yes\"]");
+    if (smtpVerifyYes && els.smtpSenderVerifyHidden) els.smtpSenderVerifyHidden.checked = smtpVerifyYes.checked;
 
     return loginModeVal;
   }
