@@ -352,7 +352,7 @@ $ dig A mx1.ntfy.sh +short
 <span class=c1>#</span>
 <span class=nt>visitor-prefix-bits-ipv4</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">24</span>
 <span class=nt>visitor-prefix-bits-ipv6</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">48</span>
-</code></pre></div> </div> </div> </div> <h3 id=tlsssl>TLS/SSL<a class=headerlink href=#tlsssl title="Permanent link">&para;</a></h3> <p>ntfy supports HTTPS/TLS by setting the <code>listen-https</code> <a href=#config-options>config option</a>. However, if you are behind a proxy, it is recommended that TLS/SSL termination is done by the proxy itself (see below).</p> <p>I highly recommend using <a href=https://certbot.eff.org/ >certbot</a>. I use it with the <a href=https://certbot-dns-route53.readthedocs.io/en/stable/ >dns-route53 plugin</a>, which lets you use <a href=https://aws.amazon.com/route53/ >AWS Route 53</a> as the challenge. That's much easier than using the HTTP challenge. I've found <a href=https://nandovieira.com/using-lets-encrypt-in-development-with-nginx-and-aws-route53>this guide</a> to be incredibly helpful.</p> <h3 id=nginxapache2caddy>nginx/Apache2/caddy<a class=headerlink href=#nginxapache2caddy title="Permanent link">&para;</a></h3> <p>For your convenience, here's a working config that'll help configure things behind a proxy. Be sure to <strong>enable WebSockets</strong> by forwarding the <code>Connection</code> and <code>Upgrade</code> headers accordingly. </p> <p>In this example, ntfy runs on <code>:2586</code> and we proxy traffic to it. We also redirect HTTP to HTTPS for GET requests against a topic or the root domain:</p> <div class="tabbed-set tabbed-alternate" data-tabs=16:5><input checked=checked id=__tabbed_16_1 name=__tabbed_16 type=radio><input id=__tabbed_16_2 name=__tabbed_16 type=radio><input id=__tabbed_16_3 name=__tabbed_16 type=radio><input id=__tabbed_16_4 name=__tabbed_16 type=radio><input id=__tabbed_16_5 name=__tabbed_16 type=radio><div class=tabbed-labels><label for=__tabbed_16_1>nginx (convenient)</label><label for=__tabbed_16_2>nginx (more secure)</label><label for=__tabbed_16_3>Apache2</label><label for=__tabbed_16_4>caddy</label><label for=__tabbed_16_5>ferron</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code># /etc/nginx/sites-*/ntfy
+</code></pre></div> </div> </div> </div> <h3 id=tlsssl>TLS/SSL<a class=headerlink href=#tlsssl title="Permanent link">&para;</a></h3> <p>ntfy supports HTTPS/TLS by setting the <code>listen-https</code> <a href=#config-options>config option</a>. However, if you are behind a proxy, it is recommended that TLS/SSL termination is done by the proxy itself (see below).</p> <p>I highly recommend using <a href=https://certbot.eff.org/ >certbot</a>. I use it with the <a href=https://certbot-dns-route53.readthedocs.io/en/stable/ >dns-route53 plugin</a>, which lets you use <a href=https://aws.amazon.com/route53/ >AWS Route 53</a> as the challenge. That's much easier than using the HTTP challenge. I've found <a href=https://nandovieira.com/using-lets-encrypt-in-development-with-nginx-and-aws-route53>this guide</a> to be incredibly helpful.</p> <h3 id=nginxapache2caddy>nginx/Apache2/caddy<a class=headerlink href=#nginxapache2caddy title="Permanent link">&para;</a></h3> <p>For your convenience, here's a working config that'll help configure things behind a proxy. Be sure to <strong>enable WebSockets</strong> by forwarding the <code>Connection</code> and <code>Upgrade</code> headers accordingly. </p> <p>In this example, ntfy runs on <code>:2586</code> and we proxy traffic to it. We also redirect HTTP to HTTPS for GET requests against a topic or the root domain:</p> <div class="tabbed-set tabbed-alternate" data-tabs=16:6><input checked=checked id=__tabbed_16_1 name=__tabbed_16 type=radio><input id=__tabbed_16_2 name=__tabbed_16 type=radio><input id=__tabbed_16_3 name=__tabbed_16 type=radio><input id=__tabbed_16_4 name=__tabbed_16 type=radio><input id=__tabbed_16_5 name=__tabbed_16 type=radio><input id=__tabbed_16_6 name=__tabbed_16 type=radio><div class=tabbed-labels><label for=__tabbed_16_1>nginx (convenient)</label><label for=__tabbed_16_2>nginx (more secure)</label><label for=__tabbed_16_3>Apache &gt;= 2.4.47</label><label for=__tabbed_16_4>Apache &lt; 2.4.47</label><label for=__tabbed_16_5>caddy</label><label for=__tabbed_16_6>ferron</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code># /etc/nginx/sites-*/ntfy
 #
 # This config allows insecure HTTP POST/PUT requests against topics to allow a short curl syntax (without -L
 # and &quot;https://&quot; prefix). It also disables output buffering, which has worked well for the ntfy.sh server.
@@ -498,6 +498,7 @@ server {
     ServerName ntfy.sh
 
     # Proxy connections to ntfy (requires &quot;a2enmod proxy proxy_http&quot;)
+    # Use mod_proxy_http for websocket upgrade (&#39;upgrade=websocket&#39;), which requires Apache (httpd) &gt;= 2.4.47.
     ProxyPass / http://127.0.0.1:2586/ upgrade=websocket
     ProxyPassReverse / http://127.0.0.1:2586/
 
@@ -524,8 +525,67 @@ server {
     Include /etc/letsencrypt/options-ssl-apache.conf
 
     # Proxy connections to ntfy (requires &quot;a2enmod proxy proxy_http&quot;)
+    # Use mod_proxy_http for websocket upgrade (&#39;upgrade=websocket&#39;), which requires Apache (httpd) &gt;= 2.4.47.
     ProxyPass / http://127.0.0.1:2586/ upgrade=websocket
     ProxyPassReverse / http://127.0.0.1:2586/
+
+    SetEnv proxy-nokeepalive 1
+    SetEnv proxy-sendchunked 1
+
+    # Higher than the max message size of 4096 bytes 
+    LimitRequestBody 102400
+
+&lt;/VirtualHost&gt;
+</code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code># /etc/apache2/sites-*/ntfy.conf
+
+&lt;VirtualHost *:80&gt;
+    ServerName ntfy.sh
+
+    # Proxy connections to ntfy (requires &quot;a2enmod proxy&quot;)
+    ProxyPass / http://127.0.0.1:2586/
+    ProxyPassReverse / http://127.0.0.1:2586/
+
+    # Enable mod_rewrite (requires &quot;a2enmod rewrite&quot;)
+    RewriteEngine on
+    # WebSockets support (requires &quot;a2enmod proxy_wstunnel&quot;)
+    # mod_proxy_wstunnel is deprecated as of Apache (httpd) 2.4.47. It also uses more resources since it relies on mod_rewrite.
+    RewriteCond %{HTTP:Upgrade} websocket [NC]
+    RewriteCond %{HTTP:Connection} upgrade [NC]
+    RewriteRule ^/?(.*) &quot;ws://127.0.0.1:2586/$1&quot; [P,L]
+
+    SetEnv proxy-nokeepalive 1
+    SetEnv proxy-sendchunked 1
+
+    # Higher than the max message size of 4096 bytes
+    LimitRequestBody 102400
+
+    # Redirect HTTP to HTTPS, but only for GET topic addresses, since we want 
+    # it to work with curl without the annoying https:// prefix (requires &quot;a2enmod alias&quot;)
+    &lt;If &quot;%{REQUEST_METHOD} == &#39;GET&#39;&quot;&gt;
+        RedirectMatch permanent &quot;^/([-_A-Za-z0-9]{0,64})$&quot; &quot;https://%{SERVER_NAME}/$1&quot;
+    &lt;/If&gt;
+
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:443&gt;
+    ServerName ntfy.sh
+
+    SSLEngine on
+    SSLCertificateFile /etc/letsencrypt/live/ntfy.sh/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/ntfy.sh/privkey.pem
+    Include /etc/letsencrypt/options-ssl-apache.conf
+
+    # Proxy connections to ntfy (requires &quot;a2enmod proxy&quot;)
+    ProxyPass / http://127.0.0.1:2586/
+    ProxyPassReverse / http://127.0.0.1:2586/
+
+    # Enable mod_rewrite (requires &quot;a2enmod rewrite&quot;)
+    RewriteEngine on
+    # WebSockets support (requires &quot;a2enmod proxy_wstunnel&quot;)
+    # mod_proxy_wstunnel is deprecated as of Apache (httpd) 2.4.47. It also uses more resources since it relies on mod_rewrite.
+    RewriteCond %{HTTP:Upgrade} websocket [NC]
+    RewriteCond %{HTTP:Connection} upgrade [NC]
+    RewriteRule ^/?(.*) &quot;ws://127.0.0.1:2586/$1&quot; [P,L]
 
     SetEnv proxy-nokeepalive 1
     SetEnv proxy-sendchunked 1
