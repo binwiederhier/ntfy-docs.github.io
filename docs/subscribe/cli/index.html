@@ -79,7 +79,7 @@ ntfy pub mywebhook
   "topic": "mytopic",
   "message": "Process with PID 8458 exited after 2.003s"
 }
-</code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code>$ ntfy pub --wait-pid $(pidof rsync) mytopic | jq .
+</code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code>$ ntfy pub --wait-pid $(pidof -s rsync) mytopic | jq .
 {
   "id": "orM6hJKNYkWb",
   "time": 1655825827,
